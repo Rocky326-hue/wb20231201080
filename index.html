@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=5.0">
+    <title>百度贴吧 - 首页</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">百度贴吧</a>
+            
+            <button class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">首页</a></li>
+                <li><a href="search.html">搜索</a></li>
+                <li><a href="#">发现</a></li>
+                <li><a href="#">消息</a></li>
+            </ul>
+            
+            <div class="nav-user">
+                <a href="auth.html" class="btn btn-outline">登录</a>
+                <a href="auth.html" class="btn btn-primary">注册</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 首页内容 -->
+    <main class="homepage">
+        <!-- 轮播图区域 -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>欢迎来到百度贴吧</h1>
+                    <p>发现有趣的话题，结交志同道合的朋友</p>
+                    
+                    <!-- 搜索框 -->
+                    <form class="search-box">
+                        <input type="text" class="search-input" placeholder="搜索贴吧、帖子或用户...">
+                        <button type="submit" class="search-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.35-4.35"></path>
+                            </svg>
+                            搜索
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- 主要内容区域 -->
+        <div class="container">
+            <div class="grid grid-cols-auto gap-xl">
+                <!-- 热门贴吧 -->
+                <section class="card">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            热门贴吧
+                        </h2>
+                        <a href="#" class="btn btn-outline">查看更多</a>
+                    </div>
+                    
+                    <div class="tieba-grid">
+                        <!-- 贴吧项目 1 -->
+                        <div class="tieba-item">
+                            <div class="tieba-avatar">游</div>
+                            <div class="tieba-name">游戏</div>
+                            <div class="tieba-members">1.2亿 成员</div>
+                        </div>
+                        
+                        <!-- 贴吧项目 2 -->
+                        <div class="tieba-item">
+                            <div class="tieba-avatar">电</div>
+                            <div class="tieba-name">电影</div>
+                            <div class="tieba-members">8900万 成员</div>
+                        </div>
+                        
+                        <!-- 贴吧项目 3 -->
+                        <div class="tieba-item">
+                            <div class="tieba-avatar">科</div>
+                            <div class="tieba-name">科技</div>
+                            <div class="tieba-members">6700万 成员</div>
+                        </div>
+                        
+                        <!-- 贴吧项目 4 -->
+                        <div class="tieba-item">
+                            <div class="tieba-avatar">体</div>
+                            <div class="tieba-name">体育</div>
+                            <div class="tieba-members">5500万 成员</div>
+                        </div>
+                        
+                        <!-- 贴吧项目 5 -->
+                        <div class="tieba-item">
+                            <div class="tieba-avatar">音</div>
+                            <div class="tieba-name">音乐</div>
+                            <div class="tieba-members">4800万 成员</div>
+                        </div>
+                        
+                        <!-- 贴吧项目 6 -->
+                        <div class="tieba-item">
+                            <div class="tieba-avatar">美</div>
+                            <div class="tieba-name">美食</div>
+                            <div class="tieba-members">4200万 成员</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 热门帖子 -->
+                <section class="card">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                            </svg>
+                            热门帖子
+                        </h2>
+                        <a href="#" class="btn btn-outline">查看更多</a>
+                    </div>
+                    
+                    <div class="post-list">
+                        <!-- 帖子 1 -->
+                        <div class="post-item" data-post-id="1">
+                            <div class="post-header">
+                                <div class="post-avatar">张</div>
+                                <div class="post-meta">
+                                    <div class="post-author">张三</div>
+                                    <div class="post-time">2小时前 · 游戏吧</div>
+                                </div>
+                            </div>
+                            <h3 class="post-title">大家最近都在玩什么游戏？求推荐！</h3>
+                            <p class="post-content">最近游戏荒了，想找一些好玩的游戏，大家有什么推荐的吗？最好是单机游戏，不要太肝的...</p>
+                            <div class="post-stats">
+                                <span class="post-stat">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                    </svg>
+                                    256
+                                </span>
+                                <span class="post-stat">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-4 6V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10c.55 0 1-.45 1-1z"/>
+                                    </svg>
+                                    89
+                                </span>
+                                <span class="post-stat">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M14 10H2v2h12v-2zm0-4H2v2h12V6zm4 8v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM2 16h8v-2H2v2z"/>
+                                    </svg>
+                                    156
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <!-- 帖子 2 -->
+                        <div class="post-item" data-post-id="2">
+                            <div class="post-header">
+                                <div class="post-avatar">李</div>
+                                <div class="post-meta">
+                                    <div class="post-author">李四</div>
+                                    <div class="post-time">5小时前 · 电影吧</div>
+                                </div>
+                            </div>
+                            <h3 class="post-title">最近有什么好看的电影推荐吗？</h3>
+                            <p class="post-content">周末想去看电影，不知道最近有什么好看的，大家有什么推荐的吗？最好是科幻或者悬疑类型的...</p>
+                            <div class="post-stats">
+                                <span class="post-stat">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                    </svg>
+                                    189
+                                </span>
+                                <span class="post-stat">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-4 6V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10c.55 0 1-.45 1-1z"/>
+                                    </svg>
+                                    67
+                                </span>
+                                <span class="post-stat">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M14 10H2v2h12v-2zm0-4H2v2h12V6zm4 8v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM2 16h8v-2H2v2z"/>
+                                    </svg>
+                                    234
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <!-- 帖子 3 -->
+                        <div class="post-item" data-post-id="3">
+                            <div class="post-header">
+                                <div class="post-avatar">王</div>
+                                <div class="post-meta">
+                                    <div class="post-author">王五</div>
+                                    <div class="post-time">1天前 · 科技吧</div>
+                                </div>
+                            </div>
+                            <h3 class="post-title">大家觉得下一代iPhone会有什么新功能？</h3>
+                            <p class="post-content">苹果发布会快到了，大家来预测一下下一代iPhone会有哪些创新功能？折叠屏？屏下摄像头？</p>
+                            <div class="post-stats">
+                                <span class="post-stat">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                    </svg>
+                                    342
+                                </span>
+                                <span class="post-stat">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-4 6V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10c.55 0 1-.45 1-1z"/>
+                                    </svg>
+                                    156
+                                </span>
+                                <span class="post-stat">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M14 10H2v2h12v-2zm0-4H2v2h12V6zm4 8v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM2 16h8v-2H2v2z"/>
+                                    </svg>
+                                    478
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024 百度贴吧. 保留所有权利.</p>
+                <p>联系我们 | 服务条款 | 隐私政策</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // 首页特定初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof tiebaApp !== 'undefined') {
+                tiebaApp.initHomePage();
+            }
+        });
+    </script>
+</body>
+</html>

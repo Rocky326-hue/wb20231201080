@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录/注册 - 百度贴吧</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: var(--spacing-xl);
+        }
+        
+        .auth-card {
+            background: var(--bg-primary);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: var(--spacing-xxl);
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .auth-header {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .auth-logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .auth-title {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .auth-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .auth-tabs {
+            display: flex;
+            margin-bottom: var(--spacing-lg);
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .auth-tab {
+            flex: 1;
+            text-align: center;
+            padding: var(--spacing-md);
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all var(--transition-medium);
+            position: relative;
+        }
+        
+        .auth-tab.active {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .auth-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 2px;
+            background: var(--primary-color);
+        }
+        
+        .auth-form {
+            display: none;
+        }
+        
+        .auth-form.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .form-group {
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: var(--spacing-sm);
+            font-weight: bold;
+            color: var(--text-primary);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: var(--spacing-md);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            transition: all var(--transition-medium);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .password-input {
+            position: relative;
+        }
+        
+        .toggle-password {
+            position: absolute;
+            right: var(--spacing-md);
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-tertiary);
+            cursor: pointer;
+        }
+        
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .remember-me input {
+            margin: 0;
+        }
+        
+        .forgot-password {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        
+        .auth-button {
+            width: 100%;
+            padding: var(--spacing-md);
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all var(--transition-medium);
+        }
+        
+        .auth-button:hover {
+            background: #5a6fd8;
+            transform: translateY(-1px);
+        }
+        
+        .auth-button:active {
+            transform: translateY(0);
+        }
+        
+        .auth-divider {
+            text-align: center;
+            margin: var(--spacing-xl) 0;
+            position: relative;
+        }
+        
+        .auth-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--border-light);
+        }
+        
+        .auth-divider span {
+            background: var(--bg-primary);
+            padding: 0 var(--spacing-md);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .social-login {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .social-btn {
+            flex: 1;
+            padding: var(--spacing-md);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all var(--transition-medium);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .social-btn:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+        
+        .auth-footer {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .auth-footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 480px) {
+            .auth-container {
+                padding: var(--spacing-md);
+            }
+            
+            .auth-card {
+                padding: var(--spacing-xl);
+            }
+            
+            .social-login {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="auth-logo">贴吧</div>
+                <h1 class="auth-title">欢迎来到百度贴吧</h1>
+                <p class="auth-subtitle">加入我们，发现更多精彩内容</p>
+            </div>
+            
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">登录</button>
+                <button class="auth-tab" data-tab="register">注册</button>
+            </div>
+            
+            <!-- 登录表单 -->
+            <form class="auth-form active" id="login-form">
+                <div class="form-group">
+                    <label class="form-label" for="login-username">用户名或手机号</label>
+                    <input type="text" id="login-username" class="form-input" placeholder="请输入用户名或手机号" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="login-password">密码</label>
+                    <div class="password-input">
+                        <input type="password" id="login-password" class="form-input" placeholder="请输入密码" required>
+                        <button type="button" class="toggle-password">👁️</button>
+                    </div>
+                </div>
+                
+                <div class="remember-forgot">
+                    <label class="remember-me">
+                        <input type="checkbox" id="remember-me">
+                        <span>记住我</span>
+                    </label>
+                    <a href="#" class="forgot-password">忘记密码？</a>
+                </div>
+                
+                <button type="submit" class="auth-button">登录</button>
+                
+                <div class="auth-divider">
+                    <span>或使用第三方登录</span>
+                </div>
+                
+                <div class="social-login">
+                    <button type="button" class="social-btn" data-provider="wechat">
+                        <span>微信</span>
+                    </button>
+                    <button type="button" class="social-btn" data-provider="qq">
+                        <span>QQ</span>
+                    </button>
+                </div>
+                
+                <div class="auth-footer">
+                    还没有账号？<a href="#" class="switch-to-register">立即注册</a>
+                </div>
+            </form>
+            
+            <!-- 注册表单 -->
+            <form class="auth-form" id="register-form">
+                <div class="form-group">
+                    <label class="form-label" for="register-username">用户名</label>
+                    <input type="text" id="register-username" class="form-input" placeholder="请输入用户名（2-20个字符）" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="register-phone">手机号</label>
+                    <input type="tel" id="register-phone" class="form-input" placeholder="请输入手机号" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="register-email">邮箱（可选）</label>
+                    <input type="email" id="register-email" class="form-input" placeholder="请输入邮箱地址">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="register-password">密码</label>
+                    <div class="password-input">
+                        <input type="password" id="register-password" class="form-input" placeholder="请输入密码（6-20个字符）" required>
+                        <button type="button" class="toggle-password">👁️</button>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="register-confirm-password">确认密码</label>
+                    <div class="password-input">
+                        <input type="password" id="register-confirm-password" class="form-input" placeholder="请再次输入密码" required>
+                        <button type="button" class="toggle-password">👁️</button>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="remember-me">
+                        <input type="checkbox" id="agree-terms" required>
+                        <span>我已阅读并同意<a href="#" style="color: var(--primary-color); margin-left: 4px;">《用户协议》</a>和<a href="#" style="color: var(--primary-color); margin-left: 4px;">《隐私政策》</a></span>
+                    </label>
+                </div>
+                
+                <button type="submit" class="auth-button">注册</button>
+                
+                <div class="auth-divider">
+                    <span>或使用第三方注册</span>
+                </div>
+                
+                <div class="social-login">
+                    <button type="button" class="social-btn" data-provider="wechat">
+                        <span>微信</span>
+                    </button>
+                    <button type="button" class="social-btn" data-provider="qq">
+                        <span>QQ</span>
+                    </button>
+                </div>
+                
+                <div class="auth-footer">
+                    已有账号？<a href="#" class="switch-to-login">立即登录</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="js/script.js"></script>
+    <script>
+        // 初始化认证页面
+        document.addEventListener('DOMContentLoaded', function() {
+            // 切换登录/注册标签
+            const tabs = document.querySelectorAll('.auth-tab');
+            const forms = document.querySelectorAll('.auth-form');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const targetTab = this.getAttribute('data-tab');
+                    
+                    // 更新标签状态
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 更新表单显示
+                    forms.forEach(form => form.classList.remove('active'));
+                    document.getElementById(`${targetTab}-form`).classList.add('active');
+                });
+            });
+            
+            // 切换密码可见性
+            const toggleButtons = document.querySelectorAll('.toggle-password');
+            toggleButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const input = this.previousElementSibling;
+                    if (input.type === 'password') {
+                        input.type = 'text';
+                        this.textContent = '🙈';
+                    } else {
+                        input.type = 'password';
+                        this.textContent = '👁️';
+                    }
+                });
+            });
+            
+            // 切换登录/注册链接
+            document.querySelector('.switch-to-register').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector('[data-tab="register"]').click();
+            });
+            
+            document.querySelector('.switch-to-login').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector('[data-tab="login"]').click();
+            });
+            
+            // 登录表单提交
+            document.getElementById('login-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const username = document.getElementById('login-username').value;
+                const password = document.getElementById('login-password').value;
+                
+                // 模拟登录验证
+                if (username && password) {
+                    // 显示加载状态
+                    const submitBtn = this.querySelector('.auth-button');
+                    const originalText = submitBtn.textContent;
+                    submitBtn.textContent = '登录中...';
+                    submitBtn.disabled = true;
+                    
+                    setTimeout(() => {
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                        
+                        // 模拟登录成功
+                        if (username === 'demo' && password === 'demo') {
+                            showToast('登录成功！', 'success');
+                            setTimeout(() => {
+                                window.location.href = 'index.html';
+                            }, 1000);
+                        } else {
+                            showToast('用户名或密码错误', 'error');
+                        }
+                    }, 1000);
+                } else {
+                    showToast('请填写完整的登录信息', 'error');
+                }
+            });
+            
+            // 注册表单提交
+            document.getElementById('register-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const username = document.getElementById('register-username').value;
+                const phone = document.getElementById('register-phone').value;
+                const password = document.getElementById('register-password').value;
+                const confirmPassword = document.getElementById('register-confirm-password').value;
+                const agreeTerms = document.getElementById('agree-terms').checked;
+                
+                // 验证表单
+                if (!username || !phone || !password || !confirmPassword) {
+                    showToast('请填写完整的注册信息', 'error');
+                    return;
+                }
+                
+                if (password !== confirmPassword) {
+                    showToast('两次输入的密码不一致', 'error');
+                    return;
+                }
+                
+                if (password.length < 6) {
+                    showToast('密码长度不能少于6个字符', 'error');
+                    return;
+                }
+                
+                if (!agreeTerms) {
+                    showToast('请同意用户协议和隐私政策', 'error');
+                    return;
+                }
+                
+                // 显示加载状态
+                const submitBtn = this.querySelector('.auth-button');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = '注册中...';
+                submitBtn.disabled = true;
+                
+                setTimeout(() => {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                    
+                    // 模拟注册成功
+                    showToast('注册成功！', 'success');
+                    setTimeout(() => {
+                        // 切换到登录页面
+                        document.querySelector('[data-tab="login"]').click();
+                        document.getElementById('login-username').value = username;
+                        document.getElementById('login-password').value = '';
+                    }, 1000);
+                }, 1500);
+            });
+            
+            // 第三方登录/注册
+            const socialButtons = document.querySelectorAll('.social-btn');
+            socialButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const provider = this.getAttribute('data-provider');
+                    showToast(`${provider === 'wechat' ? '微信' : 'QQ'}登录功能开发中...`, 'info');
+                });
+            });
+            
+            // 忘记密码
+            document.querySelector('.forgot-password').addEventListener('click', function(e) {
+                e.preventDefault();
+                showToast('忘记密码功能开发中...', 'info');
+            });
+            
+            console.log('认证页面初始化完成');
+        });
+    </script>
+</body>
+</html>

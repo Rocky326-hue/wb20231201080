@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搜索 - 贴吧</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html">贴吧</a>
+            </div>
+            
+            <!-- 搜索框 -->
+            <div class="nav-search">
+                <form class="search-form" id="search-form">
+                    <input type="text" class="search-input" placeholder="搜索贴吧、帖子、用户..." value="" id="search-input">
+                    <button type="submit" class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">首页</a>
+                <a href="#" class="nav-link">发现</a>
+                <a href="profile.html" class="nav-link">我的</a>
+                <a href="auth.html" class="nav-link">登录</a>
+            </div>
+            
+            <!-- 移动端菜单按钮 -->
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 搜索页面内容 -->
+    <div class="search-container">
+        <div class="search-header">
+            <h1>搜索结果</h1>
+            <p class="search-summary">找到 <span id="result-count">0</span> 个相关结果</p>
+        </div>
+
+        <!-- 搜索筛选器 -->
+        <div class="search-filters">
+            <div class="filter-group">
+                <span class="filter-label">类型：</span>
+                <div class="filter-options">
+                    <button class="filter-btn active" data-type="all">全部</button>
+                    <button class="filter-btn" data-type="tieba">贴吧</button>
+                    <button class="filter-btn" data-type="post">帖子</button>
+                    <button class="filter-btn" data-type="user">用户</button>
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <span class="filter-label">排序：</span>
+                <div class="filter-options">
+                    <button class="filter-btn active" data-sort="relevance">相关度</button>
+                    <button class="filter-btn" data-sort="time">时间</button>
+                    <button class="filter-btn" data-sort="hot">热度</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 搜索结果区域 -->
+        <div class="search-results">
+            <!-- 贴吧搜索结果 -->
+            <div class="result-section" id="tieba-results">
+                <h3 class="section-title">相关贴吧</h3>
+                <div class="tieba-list">
+                    <!-- 贴吧搜索结果将在这里动态生成 -->
+                </div>
+            </div>
+
+            <!-- 帖子搜索结果 -->
+            <div class="result-section" id="post-results">
+                <h3 class="section-title">相关帖子</h3>
+                <div class="post-list">
+                    <!-- 帖子搜索结果将在这里动态生成 -->
+                </div>
+            </div>
+
+            <!-- 用户搜索结果 -->
+            <div class="result-section" id="user-results">
+                <h3 class="section-title">相关用户</h3>
+                <div class="user-list">
+                    <!-- 用户搜索结果将在这里动态生成 -->
+                </div>
+            </div>
+
+            <!-- 无结果提示 -->
+            <div class="no-results" id="no-results" style="display: none;">
+                <div class="no-results-content">
+                    <i class="fas fa-search"></i>
+                    <h3>没有找到相关结果</h3>
+                    <p>尝试使用不同的关键词或调整搜索条件</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 分页 -->
+        <div class="pagination" id="pagination" style="display: none;">
+            <button class="page-btn" id="prev-page">
+                <i class="fas fa-chevron-left"></i> 上一页
+            </button>
+            <div class="page-numbers">
+                <!-- 页码将在这里动态生成 -->
+            </div>
+            <button class="page-btn" id="next-page">
+                下一页 <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>关于我们</h4>
+                <a href="#">贴吧介绍</a>
+                <a href="#">加入我们</a>
+                <a href="#">联系方式</a>
+            </div>
+            <div class="footer-section">
+                <h4>帮助中心</h4>
+                <a href="#">使用帮助</a>
+                <a href="#">常见问题</a>
+                <a href="#">反馈建议</a>
+            </div>
+            <div class="footer-section">
+                <h4>服务条款</h4>
+                <a href="#">用户协议</a>
+                <a href="#">隐私政策</a>
+                <a href="#">社区规范</a>
+            </div>
+            <div class="footer-section">
+                <h4>关注我们</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-weibo"></i></a>
+                    <a href="#"><i class="fab fa-weixin"></i></a>
+                    <a href="#"><i class="fab fa-qq"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 贴吧. 保留所有权利.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // 页面加载完成后初始化搜索页面
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.tiebaApp && window.tiebaApp.initSearchPage) {
+                window.tiebaApp.initSearchPage();
+            }
+            
+            // 从URL参数获取搜索关键词
+            const urlParams = new URLSearchParams(window.location.search);
+            const query = urlParams.get('q');
+            if (query) {
+                document.getElementById('search-input').value = query;
+                // 执行搜索
+                performSearch(query);
+            }
+        });
+
+        // 搜索表单提交
+        document.getElementById('search-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const query = document.getElementById('search-input').value.trim();
+            if (query) {
+                // 更新URL参数但不刷新页面
+                const newUrl = window.location.pathname + '?q=' + encodeURIComponent(query);
+                window.history.pushState({}, '', newUrl);
+                performSearch(query);
+            }
+        });
+
+        // 执行搜索函数
+        function performSearch(query) {
+            console.log('搜索关键词:', query);
+            // 这里将调用实际的搜索逻辑
+            // 暂时显示模拟数据
+            displayMockResults(query);
+        }
+
+        // 显示模拟搜索结果
+        function displayMockResults(query) {
+            // 模拟搜索结果数据
+            const mockResults = {
+                tiebas: [
+                    {
+                        id: 1,
+                        name: '编程' + (query ? ' - ' + query : ''),
+                        members: 12500,
+                        posts: 89000,
+                        description: '编程爱好者聚集地，分享编程经验和技术讨论',
+                        avatar: 'https://via.placeholder.com/60x60/667eea/ffffff?text=编程'
+                    },
+                    {
+                        id: 2,
+                        name: '前端开发' + (query ? ' - ' + query : ''),
+                        members: 8900,
+                        posts: 45600,
+                        description: '前端技术交流，HTML、CSS、JavaScript学习',
+                        avatar: 'https://via.placeholder.com/60x60/764ba2/ffffff?text=前端'
+                    }
+                ],
+                posts: [
+                    {
+                        id: 1,
+                        title: '关于' + query + '的讨论',
+                        content: '最近在学习' + query + '，感觉很有意思...',
+                        author: '技术爱好者',
+                        tieba: '编程',
+                        time: '2小时前',
+                        replies: 15,
+                        likes: 42
+                    },
+                    {
+                        id: 2,
+                        title: query + '学习心得分享',
+                        content: '经过一段时间的学习，对' + query + '有了更深入的理解...',
+                        author: '学习达人',
+                        tieba: '前端开发',
+                        time: '5小时前',
+                        replies: 8,
+                        likes: 23
+                    }
+                ],
+                users: [
+                    {
+                        id: 1,
+                        username: query + '爱好者',
+                        bio: '专注于' + query + '技术研究',
+                        followers: 125,
+                        avatar: 'https://via.placeholder.com/50x50/667eea/ffffff?text=用户'
+                    },
+                    {
+                        id: 2,
+                        username: query + '专家',
+                        bio: query + '领域资深专家',
+                        followers: 356,
+                        avatar: 'https://via.placeholder.com/50x50/764ba2/ffffff?text=专家'
+                    }
+                ]
+            };
+
+            // 更新结果数量
+            const totalResults = mockResults.tiebas.length + mockResults.posts.length + mockResults.users.length;
+            document.getElementById('result-count').textContent = totalResults;
+
+            // 显示/隐藏无结果提示
+            document.getElementById('no-results').style.display = totalResults > 0 ? 'none' : 'block';
+
+            // 渲染搜索结果
+            renderTiebaResults(mockResults.tiebas);
+            renderPostResults(mockResults.posts);
+            renderUserResults(mockResults.users);
+        }
+
+        // 渲染贴吧搜索结果
+        function renderTiebaResults(tiebas) {
+            const container = document.querySelector('.tieba-list');
+            container.innerHTML = '';
+
+            tiebas.forEach(tieba => {
+                const tiebaElement = document.createElement('div');
+                tiebaElement.className = 'tieba-item';
+                tiebaElement.innerHTML = `
+                    <div class="tieba-avatar">
+                        <img src="${tieba.avatar}" alt="${tieba.name}">
+                    </div>
+                    <div class="tieba-info">
+                        <h4><a href="tieba-detail.html?id=${tieba.id}">${tieba.name}</a></h4>
+                        <p class="tieba-description">${tieba.description}</p>
+                        <div class="tieba-stats">
+                            <span class="stat"><i class="fas fa-users"></i> ${tieba.members.toLocaleString()} 成员</span>
+                            <span class="stat"><i class="fas fa-comments"></i> ${tieba.posts.toLocaleString()} 帖子</span>
+                        </div>
+                    </div>
+                    <div class="tieba-actions">
+                        <button class="btn btn-primary">关注</button>
+                    </div>
+                `;
+                container.appendChild(tiebaElement);
+            });
+        }
+
+        // 渲染帖子搜索结果
+        function renderPostResults(posts) {
+            const container = document.querySelector('.post-list');
+            container.innerHTML = '';
+
+            posts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.className = 'post-item';
+                postElement.innerHTML = `
+                    <div class="post-header">
+                        <span class="post-tieba">${post.tieba}</span>
+                        <span class="post-time">${post.time}</span>
+                    </div>
+                    <h4 class="post-title">
+                        <a href="post-detail.html?id=${post.id}">${post.title}</a>
+                    </h4>
+                    <p class="post-content">${post.content}</p>
+                    <div class="post-footer">
+                        <span class="post-author">作者：${post.author}</span>
+                        <div class="post-stats">
+                            <span class="stat"><i class="fas fa-comment"></i> ${post.replies}</span>
+                            <span class="stat"><i class="fas fa-heart"></i> ${post.likes}</span>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(postElement);
+            });
+        }
+
+        // 渲染用户搜索结果
+        function renderUserResults(users) {
+            const container = document.querySelector('.user-list');
+            container.innerHTML = '';
+
+            users.forEach(user => {
+                const userElement = document.createElement('div');
+                userElement.className = 'user-item';
+                userElement.innerHTML = `
+                    <div class="user-avatar">
+                        <img src="${user.avatar}" alt="${user.username}">
+                    </div>
+                    <div class="user-info">
+                        <h4><a href="profile.html?id=${user.id}">${user.username}</a></h4>
+                        <p class="user-bio">${user.bio}</p>
+                        <div class="user-stats">
+                            <span class="stat"><i class="fas fa-users"></i> ${user.followers} 粉丝</span>
+                        </div>
+                    </div>
+                    <div class="user-actions">
+                        <button class="btn btn-outline">关注</button>
+                    </div>
+                `;
+                container.appendChild(userElement);
+            });
+        }
+    </script>
+</body>
+</html>

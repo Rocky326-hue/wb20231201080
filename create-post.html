@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>发帖 - 百度贴吧</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html">百度贴吧</a>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">首页</a>
+                <a href="search.html" class="nav-link">搜索</a>
+                <a href="profile.html" class="nav-link">我的</a>
+            </div>
+            
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 发帖内容 -->
+    <div class="container">
+        <div class="create-post-container">
+            <!-- 页面头部 -->
+            <div class="page-header">
+                <h1>发布新帖子</h1>
+                <p class="page-subtitle">在 <span id="currentTiebaName">游戏吧</span> 分享你的想法</p>
+            </div>
+
+            <!-- 发帖表单 -->
+            <form class="create-post-form" id="createPostForm">
+                <!-- 帖子基本信息 -->
+                <div class="form-section">
+                    <h2 class="section-title">帖子内容</h2>
+                    
+                    <!-- 帖子标题 -->
+                    <div class="form-group">
+                        <label for="postTitle" class="form-label">
+                            帖子标题 <span class="required">*</span>
+                        </label>
+                        <input type="text" id="postTitle" name="postTitle" class="form-input" 
+                               placeholder="请输入帖子标题（5-50个字符）" required>
+                        <div class="form-hint">
+                            <i class="fas fa-info-circle"></i>
+                            清晰简洁的标题更容易吸引读者
+                        </div>
+                    </div>
+
+                    <!-- 帖子内容 -->
+                    <div class="form-group">
+                        <label for="postContent" class="form-label">
+                            帖子内容 <span class="required">*</span>
+                        </label>
+                        <div class="editor-container">
+                            <!-- 编辑器工具栏 -->
+                            <div class="editor-toolbar">
+                                <button type="button" class="toolbar-btn" data-command="bold" title="粗体">
+                                    <i class="fas fa-bold"></i>
+                                </button>
+                                <button type="button" class="toolbar-btn" data-command="italic" title="斜体">
+                                    <i class="fas fa-italic"></i>
+                                </button>
+                                <button type="button" class="toolbar-btn" data-command="underline" title="下划线">
+                                    <i class="fas fa-underline"></i>
+                                </button>
+                                <button type="button" class="toolbar-btn" data-command="insertUnorderedList" title="无序列表">
+                                    <i class="fas fa-list-ul"></i>
+                                </button>
+                                <button type="button" class="toolbar-btn" data-command="insertOrderedList" title="有序列表">
+                                    <i class="fas fa-list-ol"></i>
+                                </button>
+                                <button type="button" class="toolbar-btn" data-command="createLink" title="插入链接">
+                                    <i class="fas fa-link"></i>
+                                </button>
+                                <button type="button" class="toolbar-btn" data-command="insertImage" title="插入图片">
+                                    <i class="fas fa-image"></i>
+                                </button>
+                                <button type="button" class="toolbar-btn" data-command="formatBlock" data-value="blockquote" title="引用">
+                                    <i class="fas fa-quote-right"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- 编辑器内容区域 -->
+                            <div id="postContent" class="editor-content" contenteditable="true" 
+                                 placeholder="请输入帖子内容（最少10个字符）"></div>
+                            
+                            <!-- 编辑器状态栏 -->
+                            <div class="editor-status">
+                                <span class="char-count">
+                                    <span id="charCount">0</span> / 5000 字符
+                                </span>
+                                <span class="editor-hint">
+                                    <i class="fas fa-info-circle"></i>
+                                    支持富文本编辑，可插入图片和链接
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 图片上传 -->
+                    <div class="form-group">
+                        <label class="form-label">图片附件</label>
+                        <div class="image-upload-container">
+                            <div class="upload-area" id="uploadArea">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>点击或拖拽图片到这里上传</p>
+                                <span class="upload-hint">支持 JPG、PNG 格式，单张图片不超过 5MB</span>
+                            </div>
+                            <input type="file" id="imageUpload" multiple accept="image/*" 
+                                   style="display: none;">
+                            <div class="image-preview" id="imagePreview"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 帖子设置 -->
+                <div class="form-section">
+                    <h2 class="section-title">帖子设置</h2>
+                    
+                    <!-- 帖子类型 -->
+                    <div class="form-group">
+                        <label class="form-label">帖子类型</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="postType" value="discussion" checked>
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">讨论帖</span>
+                                <span class="radio-description">普通讨论交流</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="postType" value="question">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">问答帖</span>
+                                <span class="radio-description">寻求帮助或解答</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="postType" value="share">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">分享帖</span>
+                                <span class="radio-description">分享资源或经验</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 帖子标签 -->
+                    <div class="form-group">
+                        <label for="postTags" class="form-label">帖子标签</label>
+                        <div class="tags-input-container">
+                            <input type="text" id="postTags" class="tags-input" placeholder="输入标签后按回车添加">
+                            <div class="tags-list" id="tagsList"></div>
+                        </div>
+                        <div class="form-hint">
+                            <i class="fas fa-info-circle"></i>
+                            添加标签有助于帖子分类和搜索（最多3个标签）
+                        </div>
+                    </div>
+
+                    <!-- 隐私设置 -->
+                    <div class="form-group">
+                        <label class="form-label">隐私设置</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="anonymous" value="1">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-text">匿名发帖</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="commentable" value="1" checked>
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-text">允许评论</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="sticky" value="1">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-text">申请置顶</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 预览区域 -->
+                <div class="form-section">
+                    <h2 class="section-title">帖子预览</h2>
+                    <div class="preview-container">
+                        <div id="postPreview" class="post-preview">
+                            <div class="preview-placeholder">
+                                <i class="fas fa-eye"></i>
+                                <p>预览将在这里显示</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 表单操作 -->
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="updatePreview()">
+                        <i class="fas fa-sync-alt"></i>
+                        更新预览
+                    </button>
+                    <button type="button" class="btn btn-outline" onclick="saveDraft()">
+                        <i class="fas fa-save"></i>
+                        保存草稿
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i>
+                        发布帖子
+                    </button>
+                    <button type="button" class="btn btn-outline" onclick="window.history.back()">
+                        取消
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>关于我们</h4>
+                <a href="#">贴吧介绍</a>
+                <a href="#">加入我们</a>
+                <a href="#">联系方式</a>
+            </div>
+            <div class="footer-section">
+                <h4>帮助中心</h4>
+                <a href="#">使用帮助</a>
+                <a href="#">常见问题</a>
+                <a href="#">反馈建议</a>
+            </div>
+            <div class="footer-section">
+                <h4>服务条款</h4>
+                <a href="#">用户协议</a>
+                <a href="#">隐私政策</a>
+                <a href="#">社区规范</a>
+            </div>
+            <div class="footer-section">
+                <h4>关注我们</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-weibo"></i></a>
+                    <a href="#"><i class="fab fa-weixin"></i></a>
+                    <a href="#"><i class="fab fa-qq"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 贴吧. 保留所有权利.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // 发帖页面特定功能
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取当前贴吧名称（从URL参数或默认值）
+            const urlParams = new URLSearchParams(window.location.search);
+            const tiebaName = urlParams.get('tieba') || '游戏吧';
+            document.getElementById('currentTiebaName').textContent = tiebaName;
+            
+            // 富文本编辑器功能
+            const editor = document.getElementById('postContent');
+            const charCount = document.getElementById('charCount');
+            
+            // 字符计数
+            editor.addEventListener('input', function() {
+                const text = this.innerText || this.textContent;
+                charCount.textContent = text.length;
+            });
+            
+            // 工具栏按钮功能
+            document.querySelectorAll('.toolbar-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const command = this.dataset.command;
+                    const value = this.dataset.value;
+                    
+                    if (command === 'insertImage') {
+                        document.getElementById('imageUpload').click();
+                    } else if (command === 'createLink') {
+                        const url = prompt('请输入链接地址：');
+                        if (url) {
+                            document.execCommand(command, false, url);
+                        }
+                    } else {
+                        document.execCommand(command, false, value);
+                    }
+                    editor.focus();
+                });
+            });
+            
+            // 图片上传功能
+            const uploadArea = document.getElementById('uploadArea');
+            const imageUpload = document.getElementById('imageUpload');
+            const imagePreview = document.getElementById('imagePreview');
+            let uploadedImages = [];
+            
+            uploadArea.addEventListener('click', () => imageUpload.click());
+            
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('drag-over');
+            });
+            
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('drag-over');
+            });
+            
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('drag-over');
+                const files = e.dataTransfer.files;
+                handleImageFiles(files);
+            });
+            
+            imageUpload.addEventListener('change', (e) => {
+                handleImageFiles(e.target.files);
+            });
+            
+            function handleImageFiles(files) {
+                Array.from(files).forEach(file => {
+                    if (file.type.startsWith('image/') && file.size <= 5 * 1024 * 1024) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            const imageData = {
+                                src: e.target.result,
+                                name: file.name
+                            };
+                            uploadedImages.push(imageData);
+                            renderImagePreview();
+                        };
+                        reader.readAsDataURL(file);
+                    } else {
+                        alert('请上传有效的图片文件（不超过5MB）');
+                    }
+                });
+            }
+            
+            function renderImagePreview() {
+                imagePreview.innerHTML = '';
+                uploadedImages.forEach((image, index) => {
+                    const imgElement = document.createElement('div');
+                    imgElement.className = 'preview-image';
+                    imgElement.innerHTML = `
+                        <img src="${image.src}" alt="${image.name}">
+                        <button type="button" class="remove-image" onclick="removeImage(${index})">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    `;
+                    imagePreview.appendChild(imgElement);
+                });
+            }
+            
+            window.removeImage = function(index) {
+                uploadedImages.splice(index, 1);
+                renderImagePreview();
+            };
+            
+            // 标签输入功能
+            const tagsInput = document.getElementById('postTags');
+            const tagsList = document.getElementById('tagsList');
+            let tags = [];
+            
+            tagsInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const tag = this.value.trim();
+                    if (tag && tags.length < 3) {
+                        addTag(tag);
+                        this.value = '';
+                    }
+                }
+            });
+            
+            function addTag(tag) {
+                if (!tags.includes(tag)) {
+                    tags.push(tag);
+                    const tagElement = document.createElement('span');
+                    tagElement.className = 'tag';
+                    tagElement.innerHTML = `
+                        ${tag}
+                        <span class="tag-remove" onclick="removeTag('${tag}')">×</span>
+                    `;
+                    tagsList.appendChild(tagElement);
+                }
+            }
+            
+            window.removeTag = function(tag) {
+                tags = tags.filter(t => t !== tag);
+                renderTags();
+            };
+            
+            function renderTags() {
+                tagsList.innerHTML = '';
+                tags.forEach(tag => addTag(tag));
+            }
+            
+            // 表单验证
+            const form = document.getElementById('createPostForm');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const postTitle = document.getElementById('postTitle').value.trim();
+                const postContent = editor.innerText || editor.textContent;
+                
+                if (!postTitle) {
+                    alert('请输入帖子标题');
+                    return;
+                }
+                
+                if (postTitle.length < 5 || postTitle.length > 50) {
+                    alert('帖子标题长度应在5-50个字符之间');
+                    return;
+                }
+                
+                if (!postContent || postContent.length < 10) {
+                    alert('帖子内容至少需要10个字符');
+                    return;
+                }
+                
+                // 模拟发布成功
+                alert('帖子发布成功！即将跳转到帖子详情页');
+                setTimeout(() => {
+                    window.location.href = 'post-detail.html';
+                }, 1000);
+            });
+        });
+        
+        // 更新预览功能
+        function updatePreview() {
+            const postTitle = document.getElementById('postTitle').value.trim();
+            const postContent = document.getElementById('postContent').innerHTML;
+            
+            if (!postTitle) {
+                alert('请输入帖子标题以预览');
+                return;
+            }
+            
+            const preview = document.getElementById('postPreview');
+            preview.innerHTML = `
+                <div class="preview-post">
+                    <h3 class="preview-title">${postTitle}</h3>
+                    <div class="preview-content">${postContent}</div>
+                    <div class="preview-meta">
+                        <span class="preview-author">贴吧用户_123456</span>
+                        <span class="preview-time">刚刚</span>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // 保存草稿功能
+        function saveDraft() {
+            const postTitle = document.getElementById('postTitle').value.trim();
+            const postContent = document.getElementById('postContent').innerHTML;
+            
+            if (!postTitle && !postContent) {
+                alert('没有内容可保存');
+                return;
+            }
+            
+            const draft = {
+                title: postTitle,
+                content: postContent,
+                timestamp: new Date().toISOString()
+            };
+            
+            localStorage.setItem('postDraft', JSON.stringify(draft));
+            alert('草稿已保存');
+        }
+        
+        // 加载草稿功能
+        function loadDraft() {
+            const draft = localStorage.getItem('postDraft');
+            if (draft) {
+                const data = JSON.parse(draft);
+                document.getElementById('postTitle').value = data.title;
+                document.getElementById('postContent').innerHTML = data.content;
+                
+                // 更新字符计数
+                const text = data.content.replace(/<[^>]*>/g, '');
+                document.getElementById('charCount').textContent = text.length;
+            }
+        }
+        
+        // 页面加载时检查是否有草稿
+        window.addEventListener('load', loadDraft);
+    </script>
+</body>
+</html>

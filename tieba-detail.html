@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=5.0">
+    <title>游戏吧 - 百度贴吧</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">百度贴吧</a>
+            
+            <button class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="search.html">搜索</a></li>
+                <li><a href="#">发现</a></li>
+                <li><a href="#">消息</a></li>
+            </ul>
+            
+            <div class="nav-user">
+                <a href="auth.html" class="btn btn-outline">登录</a>
+                <a href="auth.html" class="btn btn-primary">注册</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 贴吧详情页内容 -->
+    <main class="tieba-detail">
+        <!-- 贴吧头部信息 -->
+        <section class="tieba-header">
+            <div class="container">
+                <div class="tieba-info">
+                    <div class="tieba-main-avatar">游</div>
+                    <div class="tieba-details">
+                        <h1>游戏吧</h1>
+                        <p class="tieba-description">分享游戏心得，交流游戏经验，发现好游戏！</p>
+                        <div class="tieba-stats">
+                            <div class="stat-item">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S1.66 5 0 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm16 0H8c-1.66 0-3 1.34-3 3s1.34 3 3 3h8c1.66 0 3-1.34 3-3s-1.34-3-3-3z"/>
+                                </svg>
+                                <span>1.2亿 成员</span>
+                            </div>
+                            <div class="stat-item">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                                </svg>
+                                <span>56.8万 帖子</span>
+                            </div>
+                            <div class="stat-item">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                </svg>
+                                <span>活跃</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 操作按钮栏 -->
+                <div class="action-bar">
+                    <div class="flex items-center gap-lg">
+                        <button class="btn btn-primary">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                            关注
+                        </button>
+                        <button class="btn btn-secondary">发帖</button>
+                        <div class="search-box" style="max-width: 300px;">
+                            <input type="text" class="search-input" placeholder="搜索帖子...">
+                            <button type="submit" class="search-btn">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <path d="m21 21-4.35-4.35"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 帖子列表区域 -->
+        <div class="container">
+            <div class="grid grid-cols-auto gap-xl">
+                <!-- 帖子列表 -->
+                <section class="card">
+                    <div class="section-header">
+                        <h2 class="section-title">最新帖子</h2>
+                        <div class="flex items-center gap-md">
+                            <select class="btn btn-outline">
+                                <option>最新发布</option>
+                                <option>最多回复</option>
+                                <option>最多点赞</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="post-list">
+                        <!-- 帖子 1 -->
+                        <div class="post-item" data-post-id="101">
+                            <div class="post-header">
+                                <div class="post-avatar">张</div>
+                                <div class="post-meta">
+                                    <div class="post-author">张三</div>
+                                    <div class="post-time">2小时前</div>
+                                </div>
+                            </div>
+                            <h3 class="post-title">大家最近都在玩什么游戏？求推荐！</h3>
+                            <p class="post-content">最近游戏荒了，想找一些好玩的游戏，大家有什么推荐的吗？最好是单机游戏，不要太肝的。最近玩了几个游戏都觉得一般，想找点新鲜感...</p>
+                            <div class="post-stats">
+                                <span class="post-stat">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                    </svg>
+                                    256
+                                </span>
+                                <span class="post-stat">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-4 6V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10c.55 0 1-.45 1-1z"/>
+                                    </svg>
+                                    89
+                                </span>
+                                <span class="post-stat">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M14 10H2v2h12v-2zm0-4H2v2h12V6zm4 8v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM2 16h8v-2H2v2z"/>
+                                    </svg>
+                                    156
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <!-- 帖子 2 -->
+                        <div class="post-item" data-post-id="102">
+                            <div class="post-header">
+                                <div class="post-avatar">李</div>
+                                <div class="post-meta">
+                                    <div class="post-author">李四</div>
+                                    <div class="post-time">5小时前</div>
+                                </div>
+                            </div>
+                            <h3 class="post-title">《原神》新版本体验分享</h3>
+                            <p class="post-content">新版本更新后玩了一段时间，感觉这次的地图设计真的很棒，音乐也很出色。大家对新版本有什么看法？</p>
+                            <div class="post-stats">
+                                <span class="post-stat">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                    </svg>
+                                    342
+                                </span>
+                                <span class="post-stat">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-4 6V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10c.55 0 1-.45 1-1z"/>
+                                    </svg>
+                                    167
+                                </span>
+                                <span class="post-stat">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M14 10H2v2h12v-2zm0-4H2v2h12V6zm4 8v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM2 16h8v-2H2v2z"/>
+                                    </svg>
+                                    234
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <!-- 帖子 3 -->
+                        <div class="post-item" data-post-id="103">
+                            <div class="post-header">
+                                <div class="post-avatar">王</div>
+                                <div class="post-meta">
+                                    <div class="post-author">王五</div>
+                                    <div class="post-time">1天前</div>
+                                </div>
+                            </div>
+                            <h3 class="post-title">Switch游戏推荐：适合家庭聚会的好游戏</h3>
+                            <p class="post-content">最近家里买了Switch，想找一些适合全家人一起玩的游戏。大家有什么推荐的吗？最好是支持多人同屏的...</p>
+                            <div class="post-stats">
+                                <span class="post-stat">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                    </svg>
+                                    189
+                                </span>
+                                <span class="post-stat">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-4 6V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10c.55 0 1-.45 1-1z"/>
+                                    </svg>
+                                    45
+                                </span>
+                                <span class="post-stat">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M14 10H2v2h12v-2zm0-4H2v2h12V6zm4 8v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM2 16h8v-2H2v2z"/>
+                                    </svg>
+                                    78
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <!-- 帖子 4 -->
+                        <div class="post-item" data-post-id="104">
+                            <div class="post-header">
+                                <div class="post-avatar">赵</div>
+                                <div class="post-meta">
+                                    <div class="post-author">赵六</div>
+                                    <div class="post-time">2天前</div>
+                                </div>
+                            </div>
+                            <h3 class="post-title">PC游戏配置讨论：什么样的配置能流畅运行3A大作？</h3>
+                            <p class="post-content">想升级电脑配置，主要玩3A大作。预算在8000左右，大家有什么配置推荐吗？显卡选N卡还是A卡比较好？</p>
+                            <div class="post-stats">
+                                <span class="post-stat">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                    </svg>
+                                    278
+                                </span>
+                                <span class="post-stat">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-4 6V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10c.55 0 1-.45 1-1z"/>
+                                    </svg>
+                                    134
+                                </span>
+                                <span class="post-stat">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M14 10H2v2h12v-2zm0-4H2v2h12V6zm4 8v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM2 16h8v-2H2v2z"/>
+                                    </svg>
+                                    312
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 分页 -->
+                    <div class="flex justify-center mt-xl">
+                        <div class="flex items-center gap-sm">
+                            <button class="btn btn-outline">上一页</button>
+                            <button class="btn btn-primary">1</button>
+                            <button class="btn btn-outline">2</button>
+                            <button class="btn btn-outline">3</button>
+                            <span class="text-secondary">...</span>
+                            <button class="btn btn-outline">10</button>
+                            <button class="btn btn-outline">下一页</button>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- 侧边栏 -->
+                <aside class="card">
+                    <h3 class="section-title mb-lg">贴吧信息</h3>
+                    
+                    <div class="space-y-md">
+                        <div class="flex justify-between">
+                            <span class="text-secondary">创建时间</span>
+                            <span>2003年12月</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-secondary">吧主</span>
+                            <span>@游戏达人</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-secondary">今日发帖</span>
+                            <span>1,234</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-secondary">在线人数</span>
+                            <span>56,789</span>
+                        </div>
+                    </div>
+                    
+                    <hr class="my-lg">
+                    
+                    <h4 class="mb-md">热门标签</h4>
+                    <div class="flex flex-wrap gap-sm">
+                        <span class="btn btn-outline btn-sm">#单机游戏</span>
+                        <span class="btn btn-outline btn-sm">#网络游戏</span>
+                        <span class="btn btn-outline btn-sm">#手机游戏</span>
+                        <span class="btn btn-outline btn-sm">#游戏攻略</span>
+                        <span class="btn btn-outline btn-sm">#游戏评测</span>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024 百度贴吧. 保留所有权利.</p>
+                <p>联系我们 | 服务条款 | 隐私政策</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // 贴吧详情页特定初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof tiebaApp !== 'undefined') {
+                tiebaApp.initTiebaDetailPage();
+            }
+        });
+    </script>
+</body>
+</html>
